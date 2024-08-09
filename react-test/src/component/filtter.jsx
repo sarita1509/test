@@ -1,84 +1,87 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
- const FilterButton = ({onFilter, onclear}) => {
-    const [ filterCriteria, setFilterCriteria] = useState({
-        dateOfRegistertion: "",
-        venderScore: "",
-        status: "",
-        typeOfBusiness: "",
-        location: "",
-        assingTo: "",
+const FilterButton = ({ onFilter, onClear }) => {
+  const [filterCriteria, setFilterCriteria] = useState({
+    dateOfRegister: '',
+    vendorScore: '',
+    status: '',
+    businessType: '',
+    location: '',
+    assignTo: ''
+  });
 
-    });
-
- 
- const handleInputeChange = (e) =>
-    const { name , value}= e.target;
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
     setFilterCriteria({
-        filterCriteria,
-        [name]: value
+      ...filterCriteria,
+      [name]: value
     });
- };
+  };
 
- const handleClearClick = () => {
+  const handleFilterClick = () => {
+    onFilter(filterCriteria);
+  };
+
+  const handleClearClick = () => {
     setFilterCriteria({
-        dateOfRegistertion: '',
-        venderScore: '',
-        status:'',
-        typeOfBusiness: '',
-        location: '',
-        assingTo: '',
-   })
-  onClear();
- }
-return(
+      dateOfRegister: '',
+      vendorScore: '',
+      status: '',
+      businessType: '',
+      location: '',
+      assignTo: ''
+    });
+    onClear();
+  };
+
+  return (
     <div>
-        <input
+      <input
         type="date"
-        name="dateOfRegistertion"
-        value={filtercriteria.dateOfRegistertion}
-        onChange={handleInputchange}
-        placeholder='date of registertion'
-        />
-        <input 
+        name="dateOfRegister"
+        value={filterCriteria.dateOfRegister}
+        onChange={handleInputChange}
+        placeholder="Date of Register"
+      />
+      <input
         type="number"
-        name="venderScore"
-        value={filtercriteria.venderScore}
-        onChange={handleInputchange}
-        placeholder='vender score'
-        />
-         <input 
+        name="vendorScore"
+        value={filterCriteria.vendorScore}
+        onChange={handleInputChange}
+        placeholder="Vendor Score"
+      />
+      <input
         type="text"
         name="status"
-        value={filtercriteria.status}
-        onChange={handleInputchange}
-        placeholder='status'
-        />
-         <input 
+        value={filterCriteria.status}
+        onChange={handleInputChange}
+        placeholder="Status"
+      />
+      <input
         type="text"
-        name="typeOfBusiness"
-        value={filtercriteria.typeOfBusiness}
-        onChange={handleInputchange}
-        placeholder='type of business'
-        />
-         <input 
+        name="businessType"
+        value={filterCriteria.businessType}
+        onChange={handleInputChange}
+        placeholder="Type of Business"
+      />
+      <input
         type="text"
         name="location"
-        value={filtercriteria.location}
-        onChange={handleInputchange}
-        placeholder='location'
-        />
-        <input 
+        value={filterCriteria.location}
+        onChange={handleInputChange}
+        placeholder="Location"
+      />
+      <input
         type="text"
-        name="assingto"
-        value={filtercriteria.assingTo}
-        onChange={handleInputchange}
-        placeholder='assign to '
-        />       
-<button onClick={handlefilterclick}>filter</button>
-<button onClick={handleClearClick}>clear</button>
-
+        name="assignTo"
+        value={filterCriteria.assignTo}
+        onChange={handleInputChange}
+        placeholder="Assign To"
+      />
+      <button onClick={handleFilterClick}>Filter</button>
+      <button onClick={handleClearClick}>Clear</button>
     </div>
-)
+  );
+};
 
-export default filterButton;
+export default FilterButton;
