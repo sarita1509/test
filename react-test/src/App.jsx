@@ -1,41 +1,48 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import FilterButton from './FilterButton';
+import ResourceList from './ResourceList';
 
-import './App.css'
-import ResourceList from './component/ResourceList';
+const initialResources = [
+  {
+    dateOfRegister: '',
+    vendorScore: '',
+    status: 'Active',
+    businessType: 'Retail',
+    location: 'New York',
+    assignTo: 'sarita'
+  },
+  
+]
 
-const App = ()=> {
-  const [resource, setResource] = useState(initialResource);
-  const [filteredResources, setFilterResource] =useState(initialResource);
+const App = () => {
+  const [resources, setResources] = useState(initialResources);
+  const [filteredResources, setFilteredResources] = useState(initialResources);
 
-  const handleFilter = (criteria) =>{
-    const filtered = resource.filter((resource)=>{
-      return(
-        (!criteria.dateOfRegistration || Resource.dateOfRegistration === criteria.dateOfRegistration
-         ) &&
-         (!criteria.venderScore || Resource.venderScore >= criteria.venderScore
-         ) &&
-         (!criteria.status || Resource.status.toLowerCase() === criteria.status.toLowerCase()
-         ) &&
-         (!criteria.typeOfBusiness || Resource.typeOfBusiness.toLowerCase() === criteria.typeOfBusiness.toLowerCase()
-         ) &&
-         (!criteria.location || Resource.location.toLowerCase() === criteria.location.toLowerCase()
-         ) &&
-         (!criteria.assignTo || Resource.assignTo.toLowerCase() === assignTo.toLowerCase()
-         ) &&
+  const handleFilter = (criteria) => {
+    const filtered = resources.filter((resource) => {
+      return (
+        (!criteria.dateOfRegister || resource.dateOfRegister === criteria.dateOfRegister) &&
+        (!criteria.vendorScore || resource.vendorScore >= criteria.vendorScore) &&
+        (!criteria.status || resource.status.toLowerCase() === criteria.status.toLowerCase()) &&
+        (!criteria.businessType || resource.businessType.toLowerCase() === criteria.businessType.toLowerCase()) &&
+        (!criteria.location || resource.location.toLowerCase() === criteria.location.toLowerCase()) &&
+        (!criteria.assignTo || resource.assignTo.toLowerCase() === criteria.assignTo.toLowerCase())
       );
-
     });
-    setFilterResource(filtered);
+    setFilteredResources(filtered);
   };
-  const handleclear (resources);
-};
-return(
-  <div>
-    <h1>filter</h1>
-    <filterButton onFiler={handlefiler} onclear={handleclear} />
-    <ResourceList resources= {filteredResources}/>
-  </div>
-)
 
+  const handleClear = () => {
+    setFilteredResources(resources);
+  };
+
+  return (
+    <div>
+      <h1>Filter Resources</h1>
+      <FilterButton onFilter={handleFilter} onClear={handleClear} />
+      <ResourceList resources={filteredResources} />
+    </div>
+  );
+};
 
 export default App;
